@@ -32,6 +32,7 @@ except ImportError:
 else:
     USE_CYTHON = True
 
+print('USE_CYTHON =', USE_CYTHON)
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -185,6 +186,14 @@ extensions = [
     Extension(
         name="cornac.models.bpr.recom_wbpr",
         sources=["cornac/models/bpr/recom_wbpr" + ext],
+        include_dirs=[np.get_include(), "cornac/utils/external"],
+        language="c++",
+        extra_compile_args=compile_args,
+        extra_link_args=link_args,
+    ),
+    Extension(
+        name="cornac.models.bpr.recom_rubpr",
+        sources=["cornac/models/bpr/recom_rubpr" + ext],
         include_dirs=[np.get_include(), "cornac/utils/external"],
         language="c++",
         extra_compile_args=compile_args,
