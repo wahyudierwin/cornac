@@ -100,6 +100,11 @@ class RUBPR(BPR):
         assert self.i_factors is not None, "item factors should be provided"
         assert self.i_biases is not None, "item biases should be provided"
 
+        num_items, num_factors = self.i_factors
+
+        assert len(self.i_biases) == num_items, "number of item should be same between factors and biases"
+        assert self.k == num_factors, "number of factors should be same with existing factor size in item factors"
+
     @cython.cdivision(True)
     @cython.boundscheck(False)
     @cython.wraparound(False)
