@@ -17,9 +17,16 @@
 
 cimport cython
 from cython cimport floating, integral
+from cython.parallel import parallel, prange
+from libc.math cimport exp
 
 from .recom_bpr import BPR
 from .recom_bpr cimport RNGVector
+from .recom_bpr cimport has_non_zero
+
+
+cdef extern from "recom_bpr.h" namespace "recom_bpr" nogil:
+    cdef int get_thread_num()
 
 
 class RUBPR(BPR):
@@ -89,6 +96,7 @@ class RUBPR(BPR):
             seed=seed
         )
 
+        # item factors and biases should be provided
         assert self.i_factors is not None, "item factors should be provided"
         assert self.i_biases is not None, "item biases should be provided"
 
