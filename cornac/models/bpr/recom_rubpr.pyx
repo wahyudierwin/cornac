@@ -21,8 +21,7 @@ from cython.parallel import parallel, prange
 from libc.math cimport exp
 
 from .recom_bpr import BPR
-from .recom_bpr cimport RNGVector
-from .recom_bpr cimport has_non_zero
+from .recom_bpr cimport RNGVector, has_non_zero
 
 
 cdef extern from "recom_bpr.h" namespace "recom_bpr" nogil:
